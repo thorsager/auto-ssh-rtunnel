@@ -1,5 +1,5 @@
 FROM alpine:3.6
-MAINTAINER "Michale Thorsager <thorsager@gmail.com>"
+MAINTAINER "Michael Thorsager <thorsager@gmail.com>"
 
 RUN echo "@community http://dl-4.alpinelinux.org/alpine/v3.6/community/" >> /etc/apk/repositories \
     && apk add --no-cache --update autossh@community \
