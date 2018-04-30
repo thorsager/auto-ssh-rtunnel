@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-KEY_ALGO=ed25519
+KEY_ALGO=${KEY_ALGO:-"ed25519"}
 KEY_FILE=${KEY_FILE:-"/root/.ssh/id_${KEY_ALGO}_AUTO_RTUNNEL"}
 
 if [[ ! -d /root/.ssh ]]; then

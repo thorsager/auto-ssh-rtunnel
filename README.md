@@ -34,11 +34,13 @@ in the container.
   Fx. `joe@server.mydomain.tld`
 - `RT_TARGET_PORT` - The port on which the *sshd* is listening on the target-host
 - `RT_TUNNEL_*` - All _tunnel-descriptions_ are converted into `-R` arguments on
-  the ssh connection. **(Note names of RT_TUNNEL_* variables MUST be unique, but
+  the ssh connection. **(Note names of `RT_TUNNEL_*` variables MUST be unique, but
   the suffix is not of importance)**
 
-- `KEY_FILE` - ..
-- `KEY_ALGO` - ..
+- `KEY_FILE` - Can be used for overriding the name of the key to be generated or
+  to force autossh to use a specific key.
+- `KEY_ALGO` - Can be used to override the algorithem used when generating a new
+  key, defaults to `ed25519`
 - `SSH_OPTS` - Can be used for passing arguments directly to the ssh-client such
   as `-v` for a bit of debugging.
 
