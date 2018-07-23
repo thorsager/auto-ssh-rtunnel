@@ -24,7 +24,7 @@ services:
   ltunnel:
       - TARGET=user@my-jump-host
       - TARGET_PORT=22
-      - L_TUNNEL_0=3306:85.218.128.197:3306
+      - L_TUNNEL_0=3306:my-sql-host:3306
       - SSH_OPTS=-v
     ports:
       - 3306:3306
