@@ -9,16 +9,25 @@ services:
   web3:
     image: hashicorp/http-echo
     command: -text="hello world, from web 3"
+
   rtunnel:
     build: .
     volumes:
       - rtunnel:/root/.ssh
     environment:
-      - RT_TARGET=user@myhost
-      - RT_TARGET_PORT=22
-      - RT_TUNNEL_0=3000:web:5678
-      - RT_TUNNEL_1=3001:web2:5678
-      - RT_TUNNEL_2=3002:web3:5678
-      # - SSH_OPTS=-v
+      - TARGET=mit@ljump-1
+      - TARGET_PORT=22
+      - R_TUNNEL_0=3000:web:5678
+      - R_TUNNEL_1=3001:web2:5678
+      - R_TUNNEL_2=3002:web3:5678
+
+  ltunnel:
+      - TARGET=user@my-jump-host
+      - TARGET_PORT=22
+      - L_TUNNEL_0=3306:85.218.128.197:3306
+      - SSH_OPTS=-v
+    ports:
+      - 3306:3306
+
 volumes:
   rtunnel:

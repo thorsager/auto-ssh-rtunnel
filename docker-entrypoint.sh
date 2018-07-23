@@ -31,23 +31,27 @@ echo "==== Public key ===="
 cat ${KEY_FILE}.pub
 echo "===================="
 
-if [[ -z ${RT_TARGET} ]]; then
-  echo "NO Target host found! please set RT_TARGET"
+if [[ -z ${TARGET} ]]; then
+  echo "NO Target host found! please set TARGET"
   exit 1;
 fi
 
-if [[ -z ${RT_TARGET_PORT} ]]; then
-  echo "NO Target port found! please set RT_TARGET_PORT"
+if [[ -z ${TARGET_PORT} ]]; then
+  echo "NO Target port found! please set TARGET_PORT"
   exit 1;
 fi
 
-for TUNNEL_CFG in $(env | grep RT_TUNNEL_); do
+for TUNNEL_CFG in $(env | grep R_TUNNEL_); do
   TUNNEL_OPTS="${TUNNEL_OPTS} -R ${TUNNEL_CFG#*=}"
 done
 
+for TUNNEL_CFG in $(env | grep L_TUNNEL_); do
+  TUNNEL_OPTS="${TUNNEL_OPTS} -L ${HOST_IP}:${TUNNEL_CFG#*=}"
+done
+
 echo "****"
-echo "**** ${TUNNEL_OPTS}"
+echo "**** autossh -N ${TUNNEL_OPTS} ${TARGET} -p ${TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}"
 echo "****"
 
-echo autossh -N ${TUNNEL_OPTS} ${RT_TARGET} -p ${RT_TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}
-exec autossh -N ${TUNNEL_OPTS} ${RT_TARGET} -p ${RT_TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}
+echo autossh -N ${TUNNEL_OPTS} ${TARGET} -p ${TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}
+exec autossh -N ${TUNNEL_OPTS} ${TARGET} -p ${TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}
