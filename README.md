@@ -59,3 +59,9 @@ environment variables and store it in the `config` file using `RemoteForward` an
 Docker-compose
 ==============
 A small example of how this could be used id found here [here](https://github.com/thorsager/auto-ssh-rtunnel/blob/master/docker-compose.yml)
+
+Special host
+============
+A special host-name can be used if connections to the host machine is required.
+If the hostname `docker.host` is used, this will be substituted with the IP of
+the Host machine (fetched from the default-route in the container).
