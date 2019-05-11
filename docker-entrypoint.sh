@@ -2,6 +2,7 @@
 
 KEY_ALGO=${KEY_ALGO:-"ed25519"}
 KEY_FILE=${KEY_FILE:-"/root/.ssh/id_${KEY_ALGO}_AUTO_RTUNNEL"}
+DOCKER_HOST=$(ip route show | awk '/default/ {print $3}')
 
 if [[ ! -d /root/.ssh ]]; then
   echo "Creating .ssh"
@@ -42,11 +43,15 @@ if [[ -z ${TARGET_PORT} ]]; then
 fi
 
 for TUNNEL_CFG in $(env | grep R_TUNNEL_); do
-  TUNNEL_OPTS="${TUNNEL_OPTS} -R ${TUNNEL_CFG#*=}"
+  CFG=${TUNNEL_CFG#*=}
+  CFG=${CFG/docker.host/$DOCKER_HOST}
+  TUNNEL_OPTS="${TUNNEL_OPTS} -R ${CFG}"
 done
 
 for TUNNEL_CFG in $(env | grep L_TUNNEL_); do
-  TUNNEL_OPTS="${TUNNEL_OPTS} -L ${HOST_IP}:${TUNNEL_CFG#*=}"
+  CFG=${TUNNEL_CFG#*=}
+  CFG=${CFG/docker.host/$DOCKER_HOST}
+  TUNNEL_OPTS="${TUNNEL_OPTS} -L ${HOST_IP}:${CFG#*=}"
 done
 
 echo "****"
