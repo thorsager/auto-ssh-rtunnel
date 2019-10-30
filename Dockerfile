@@ -1,7 +1,7 @@
-FROM alpine:3.6
+FROM alpine:3.10
 MAINTAINER "Michael Thorsager <thorsager@gmail.com>"
 
-RUN echo "@community http://dl-4.alpinelinux.org/alpine/v3.6/community/" >> /etc/apk/repositories \
+RUN echo "@community http://dl-4.alpinelinux.org/alpine/v3.10/community/" >> /etc/apk/repositories \
     && apk add --no-cache --update autossh@community \
     && rm -rf /var/lib/apt/lists/*
 
