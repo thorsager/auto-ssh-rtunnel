@@ -58,5 +58,4 @@ echo "****"
 echo "**** autossh -N ${TUNNEL_OPTS} ${TARGET} -p ${TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}"
 echo "****"
 
-echo autossh ${AUTOSSH_OPTS} -N ${TUNNEL_OPTS} ${TARGET} -p ${TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}
-exec autossh ${AUTOSSH_OPTS} -N ${TUNNEL_OPTS} ${TARGET} -p ${TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}
+exec autossh -N ${TUNNEL_OPTS} ${TARGET} -p ${TARGET_PORT} -i ${KEY_FILE} ${SSH_OPTS}
